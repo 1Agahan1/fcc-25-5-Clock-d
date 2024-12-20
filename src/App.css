@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #8f8f8f;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #1a1a1a;
+}
+
+.length-controls {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.control-group {
+  text-align: center;
+}
+
+.control-group h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.controls button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.2s;
+}
+
+.controls button:hover {
+  background-color: #357abd;
+}
+
+.controls span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  min-width: 40px;
+}
+
+.timer {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#timer-label {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+#time-left {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  font-family: monospace;
+  color: #1a1a1a;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+#start_stop {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+#start_stop:hover {
+  background-color: #3d8b40;
+}
+
+#reset {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+#reset:hover {
+  background-color: #d32f2f;
+}
+
+@media (max-width: 480px) {
+  .length-controls {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  #time-left {
+    font-size: 2.5rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+}
