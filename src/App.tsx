@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import "./App.css";
+import { useState, useEffect, useRef } from 'react';
+import './App.css';
 
 const PomodoroTimer = () => {
   const [breakLength, setBreakLength] = useState(5);
@@ -7,17 +7,17 @@ const PomodoroTimer = () => {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [timerLabel, setTimerLabel] = useState('Session');
   const [isRunning, setIsRunning] = useState(false);
-  const audioRef = useRef(null);
-  const timerRef = useRef(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const timerRef = useRef<number | null>(null);
 
-  const formatTime = (timeInSeconds) => {
+  const formatTime = (timeInSeconds: number) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
   const handleReset = () => {
-    clearInterval(timerRef.current);
+    if (timerRef.current) clearInterval(timerRef.current);
     setBreakLength(5);
     setSessionLength(25);
     setTimeLeft(25 * 60);
@@ -30,12 +30,12 @@ const PomodoroTimer = () => {
   };
 
   const handleStartStop = () => {
-    setIsRunning(!isRunning);
+    setIsRunning(prev => !prev);
   };
 
-  const adjustLength = (type, amount) => {
+  const adjustLength = (type: string, amount: number) => {
     if (isRunning) return;
-    
+
     if (type === 'break') {
       const newBreakLength = breakLength + amount;
       if (newBreakLength > 0 && newBreakLength <= 60) {
@@ -57,7 +57,7 @@ const PomodoroTimer = () => {
       timerRef.current = setInterval(() => {
         setTimeLeft(prev => {
           if (prev === 0) {
-            audioRef.current.play();
+            if (audioRef.current) audioRef.current.play();
             if (timerLabel === 'Session') {
               setTimerLabel('Break');
               return breakLength * 60;
@@ -69,17 +69,19 @@ const PomodoroTimer = () => {
           return prev - 1;
         });
       }, 1000);
-    } else {
+    } else if (timerRef.current) {
       clearInterval(timerRef.current);
     }
 
-    return () => clearInterval(timerRef.current);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
   }, [isRunning, timerLabel, breakLength, sessionLength]);
 
   return (
     <div className="container">
       <h1 className="title">25 + 5 Clock</h1>
-      
+
       <div className="length-controls">
         <div className="control-group">
           <h2 id="break-label">Break Length</h2>
